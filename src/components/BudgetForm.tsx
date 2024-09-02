@@ -25,7 +25,7 @@ export default function BudgetForm() {
                 <label htmlFor="budget" className="textl-4xl text-blue-600 font-bold text-center">Definir presupuesto</label>
                 <input
                     type="number"
-                    className="w-full bg-white border border-gray-200 p-2 text-center bg-slate-100"
+                    className="w-full bg-slate-100 border border-gray-200 p-2 text-center"
                     placeholder="Define tu presupuesto"
                     name="budget"
                     id=" budget"
