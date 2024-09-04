@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import type { DraftExpense, Value } from "../types"
 import { categories } from "../data/category"
 import DatePicker from "react-date-picker"
@@ -17,7 +17,14 @@ export default function ExpenseForm() {
     })
 
     const [error, setError] = useState('')
-    const { dispatch } = useBudget()
+    const { dispatch, state } = useBudget()
+
+    useEffect(() => {
+        if (state.editingId) {
+            const editingExpense = state.expenses.filter(currentExpense => currentExpense.id === state.editingId)[0]
+            setExpense(editingExpense)
+        }
+    }, [state.editingId])
 
     const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target
@@ -38,8 +45,12 @@ export default function ExpenseForm() {
             return
         }
 
-        // Add new expense
-        dispatch({ type: 'add-expense', payload: { expense } })
+        // Add or edit expense
+        if (state.editingId) {
+            dispatch({ type: 'edit-expense', payload: { expense: { id: state.editingId, ...expense } } })
+        } else {
+            dispatch({ type: 'add-expense', payload: { expense } })
+        }
 
         // Reset form
         setExpense({
@@ -52,7 +63,7 @@ export default function ExpenseForm() {
 
     return (
         <form className="space-y-5" onSubmit={handleSubmit}>
-            <legend className="uppercase text-2xl font-black text-center border-b-4 border-blue-500">Nuevo Gasto</legend>
+            <legend className="uppercase text-2xl font-black text-center border-b-4 border-blue-500">{state.editingId ? 'Editar Gasto' : 'Nuevo Gasto'}</legend>
             {error && <ErrorMessage>{error}</ErrorMessage>}
             <div className="flex flex-col gap-2">
                 <label htmlFor="expenseName" className="textl-xl">Nombre Gasto:</label>
@@ -79,7 +90,7 @@ export default function ExpenseForm() {
                 <DatePicker name="date" id="date" value={expense.date} onChange={handleChangeDate} className="bg-slate-100 p-2 border-0" />
             </div>
 
-            <input type="submit" value="Registrar Gasto" className="bg-blue-600 hover:bg-blue-700 cursor-pointer w-full p-2 text-white font-bbold uppercase rounded-lg transition" />
+            <input type="submit" value={state.editingId ? 'Guardar Cambios' : 'Añadir Gasto'} className="bg-blue-600 hover:bg-blue-700 cursor-pointer w-full p-2 text-white font-bbold uppercase rounded-lg transition" />
         </form>
     )
 }
