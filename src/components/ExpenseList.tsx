@@ -14,12 +14,14 @@ export default function ExpenseList() {
             {isEmpty ? <p className="text-gray-600 text-2xl font-bold">No hay gastos</p> :
                 <>
                     <p className="text-gray-600 text-2xl font-bold my-5"> Listado de Gastos</p>
-                    {filteredExpenses.map(expense => (
-                        <ExpenseDetail
-                            key={expense.id}
-                            expense={expense}
-                        />
-                    ))}
+                    <div className="flex flex-col gap-y-5">
+                        {filteredExpenses.map(expense => (
+                            <ExpenseDetail
+                                key={expense.id}
+                                expense={expense}
+                            />
+                        ))}
+                    </div>
                 </>
             }
         </div>

@@ -43,7 +43,7 @@ export default function ExpenseDetail({ expense }: ExpenseDetailProps) {
                 leadingActions={leadingActions()}
                 trailingActions={trailingActions()}
             >
-                <div className="bg-white shadow-lg p-5 w-full border-b border-gray-200 flex gap-5 items-center select-none">
+                <div className="bg-slate-100 rounded-lg shadow-lg p-5 w-full border-b border-gray-200 flex gap-5 items-center select-none sm:flex-row flex-col">
                     <div>
                         <img
                             src={`/icono_${categoryInfo.icon}.svg`}
@@ -52,10 +52,10 @@ export default function ExpenseDetail({ expense }: ExpenseDetailProps) {
                             draggable="false"
                         />
                     </div>
-                    <div className="flex-1 space-y-2">
+                    <div className="flex-1 space-y-2 text-center sm:text-start">
                         <p className="text-sm font-bol uppercase text-slate-500">{categoryInfo.name}</p>
                         <p>{expense.expenseName}</p>
-                        <p className="text-slate-600 text-sm">{formatDate(expense.date!.toString())}</p>
+                        <p className="text-slate-600 text-sm text-pretty">{formatDate(expense.date!.toString())}</p>
                     </div>
                     <AmountDisplay
                         amount={expense.amount}

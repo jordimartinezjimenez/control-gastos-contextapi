@@ -9,7 +9,7 @@
 }
 
 .swipeable-list-item__leading-actions {
-    @apply bg-blue-600;
+    @apply bg-gradient-to-r from-indigo-400 to-purple-600;
 }
 
 .swipeable-list-item__trailing-actions {

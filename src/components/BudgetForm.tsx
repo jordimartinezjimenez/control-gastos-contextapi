@@ -22,7 +22,7 @@ export default function BudgetForm() {
     return (
         <form className="space-y-5" onSubmit={handleSubmit}>
             <div className="flex flex-col space-y-5">
-                <label htmlFor="budget" className="textl-4xl text-blue-600 font-bold text-center">Definir presupuesto</label>
+                <label htmlFor="budget" className="text-3xl text-indigo-400 font-medium text-center">Definir presupuesto</label>
                 <input
                     type="number"
                     className="w-full bg-slate-100 border border-gray-200 p-2 text-center"
@@ -35,8 +35,8 @@ export default function BudgetForm() {
             </div>
             <input
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 cursor-pointer w-full p-2 text-white font-black uppercase disabled:opacity-40"
-                value="Definir Presupuesto"
+                className="bg-indigo-400 hover:bg-indigo-500 cursor-pointer w-full p-2 text-white font-black uppercase disabled:opacity-40 transition disabled:cursor-not-allowed"
+                value="Añadir"
                 disabled={isValid}
             />
         </form>
